@@ -28,7 +28,7 @@ export default class Game {
   update() {
     this.clear();
     this.snake.move();
-    this.eatApple();
+    this.snake.eatApple(this.apple);
     this.checkHit();
   }
 
@@ -57,61 +57,20 @@ export default class Game {
     });
   }
 
-  GameOVer() {
+  gameOver() {
     this.clear();
-    this.snake = new Snake(20, 20, 20);
-    this.apple = new Apple(20, "red");
+    this.snake.respawn();
+    this.apple.respawn();
   }
 
   checkHit() {
-    this.checkHitWall();
-    this.checkHitWithTail();
-  }
-
-  checkHitWithTail() {
-    const headTail = this.snake.getHeadTail();
-
-    for (let i = 0; i < this.snake.tail.length - 2; i++) {
-      if (headTail.x === this.snake.tail[i].x && headTail.y === this.snake.tail[i].y) {
-        this.GameOVer();
-        console.log(this.snake.tail);
-      }
+    this.snake.checkHitWithWall(this.canvas);
+    if (this.snake.checkHitWithTail()) {
+      this.gameOver();
     }
   }
 
-  checkHitWithApple() {
-    const headTail = this.snake.getHeadTail();
-
-    if (
-      headTail.x == this.apple.x &&
-      headTail.y == this.apple.y
-    ) {
-      return true;
-    }
-  }
-
-  checkHitWall() {
-    const headTail = this.snake.getHeadTail();
-
-    if (headTail.x == -this.snake.size) {
-      headTail.x = this.canvas.width - this.snake.size;
-    } else if (headTail.x == this.canvas.width) {
-      headTail.x = 0;
-    } else if (headTail.y == -this.snake.size) {
-      headTail.y = this.canvas.height - this.snake.size;
-    } else if (headTail.y == this.canvas.height) {
-      headTail.y = 0;
-    }
-  }
-
-  eatApple() {
-    if (this.checkHitWithApple()) {
-      this.snake.increase({ x: this.apple.x, y: this.apple.y })
-      this.apple = new Apple(20, "red");
-    }
-  }
-
-  drawBackGround() {
+  drawBackground() {
     this.createRect(0, 0, this.canvas.width, this.canvas.height, "black");
   }
 
@@ -119,6 +78,9 @@ export default class Game {
     this.canvasContext.font = "20px Arial";
     this.canvasContext.fillStyle = "#00FF42";
     this.canvasContext.fillText("Score: " + (this.snake.tail.length - 1), this.canvas.width - 120, 18);
+  }
+
+  drawApple() {
     this.createRect(this.apple.x, this.apple.y, this.apple.size, this.apple.size, this.apple.color);
   }
 
@@ -135,9 +97,10 @@ export default class Game {
   }
 
   draw() {
-    this.drawBackGround();
+    this.drawBackground();
     this.drawSnake();
     this.drawScore();
+    this.drawApple();
   }
 
   createRect(x, y, width, height, color) {
