@@ -5,9 +5,9 @@ export default class Game {
   constructor() {
     this.canvas = document.getElementById("canvas");
     this.canvasContext = canvas.getContext("2d");
-    this.snake = new Snake(20, 20, 20);
+    this.snake = new Snake(20, 20, 20, 'white');
     this.apple = new Apple(20, "red");
-    this.fps = 15;
+    this.fps = 10;
   }
 
   initialize() {
@@ -81,7 +81,7 @@ export default class Game {
   }
 
   drawApple() {
-    this.createRect(this.apple.x, this.apple.y, this.apple.size, this.apple.size, this.apple.color);
+    this.createRect(this.apple.x + 2.5, this.apple.y + 2.5, this.apple.size - 5, this.apple.size - 5, this.apple.color);
   }
 
   drawSnake() {

@@ -1,12 +1,12 @@
 export default class Snake {
-  constructor(x, y, size) {
+  constructor(x, y, size , color) {
     this.x = x;
     this.y = y;
     this.size = size;
+    this.color = color;
     this.tail = [{ x: this.x, y: this.y }];
     this.rotateX = 0;
     this.rotateY = 1;
-    this.color = "white";
   }
 
   respawn() {
