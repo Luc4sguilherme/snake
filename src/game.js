@@ -77,7 +77,7 @@ export default class Game {
   drawScore() {
     this.canvasContext.font = "20px Arial";
     this.canvasContext.fillStyle = "#00FF42";
-    this.canvasContext.fillText("Score: " + (this.snake.tail.length - 1), this.canvas.width - 120, 18);
+    this.canvasContext.fillText("Score: " + (this.snake.tail.length - 1), this.canvas.width - 100, 25);
   }
 
   drawApple() {
