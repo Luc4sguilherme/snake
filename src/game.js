@@ -81,7 +81,7 @@ export default class Game {
   }
 
   drawApple() {
-    this.createRect(this.apple.x + 2.5, this.apple.y + 2.5, this.apple.size - 5, this.apple.size - 5, this.apple.color);
+    this.createRect(this.apple.position.x + 2.5, this.apple.position.y + 2.5, this.apple.size - 5, this.apple.size - 5, this.apple.color);
   }
 
   drawSnake() {

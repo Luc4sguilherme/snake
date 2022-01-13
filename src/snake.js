@@ -56,7 +56,7 @@ export default class Snake {
   checkHitWithApple(apple) {
     const headTail = this.getHeadTail();
 
-    if (headTail.x == apple.x && headTail.y == apple.y) {
+    if (headTail.x == apple.position.x && headTail.y == apple.position.y) {
       return true;
     }
   }
@@ -89,7 +89,7 @@ export default class Snake {
 
   eatApple(apple) {
     if (this.checkHitWithApple(apple)) {
-      this.grow({ x: apple.x, y: apple.y });
+      this.grow({ x: apple.position.x, y: apple.position.y });
       apple.respawn();
     }
   }

@@ -2,8 +2,7 @@ export default class Apple {
   constructor(size, color) {
     this.size = size;
     this.color = color;
-    this.x = this.spawn().x;
-    this.y = this.spawn().y;
+    this.position = this.spawn()
   }
 
   spawn() {
@@ -14,7 +13,6 @@ export default class Apple {
   }
 
   respawn() {
-    this.x = this.spawn().x;
-    this.y = this.spawn().y;
+    this.position = this.spawn()
   }
 }
